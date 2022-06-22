@@ -1,13 +1,15 @@
 program formulas
 implicit none
 
-real, dimension(1) :: vector
-real, dimension(1) :: vector1
+real, dimension(2) :: vector
+real, dimension(2) :: vector1
 integer::a=100
-vector = 2
-vector1 = 2
+vector(1) = 1
+vector(2) = 0
+vector1(1) = 0
+vector1(2) = 1
 
-write(*,*) get_norma(vector), scale_product(vector, vector1)
+write(*,*) get_norma(vector), get_cos(vector, vector1)
 call print_vet
 
 contains 
@@ -46,4 +48,13 @@ contains
 			enddo
 		endif
 	end function scale_product
+	!-------------------------------------------------
+	real function get_cos(u, v)
+	implicit none
+		real, dimension(:) :: u
+		real, dimension(:) :: v
+		
+		get_cos = scale_product(u, v)/(get_norma(u)*get_norma(v))	
+	end function get_cos
+	
 end program
