@@ -10,15 +10,16 @@ vector1(1) = 1
 vector1(2) = 1
 
 write(*,*) get_norma(vector), proj(vector, vector1)
-call print_vet
+call print_vet(vector1)
 
 contains 
 	
-	subroutine print_vet
+	subroutine print_vet(vet)
 	implicit none
+		real, dimension(:) :: vet
 		integer :: i
-		do i=1,size(vector)
-			write(*,*) vector(i)
+		do i=1,size(vet)
+			write(*,*) vet(i)
 		end do
 		
 	end subroutine print_vet
