@@ -6,10 +6,10 @@ real, dimension(2) :: vector1
 integer::a=100
 vector(1) = 1
 vector(2) = 0
-vector1(1) = 0
+vector1(1) = 1
 vector1(2) = 1
 
-write(*,*) get_norma(vector), get_cos(vector, vector1)
+write(*,*) get_norma(vector), proj(vector, vector1)
 call print_vet
 
 contains 
@@ -56,5 +56,27 @@ contains
 		
 		get_cos = scale_product(u, v)/(get_norma(u)*get_norma(v))	
 	end function get_cos
+	!-------------------------------------------------	
+	real function sp_const(t, u)
+	implicit none
+		integer :: i
+		real :: t 
+		real, dimension(:) :: u
+		
+		sp_const = 0
+		do i=1,size(u)
+			sp_const = sp_const + t*u(i)
+		enddo
+	
+	end function sp_const
+	!-------------------------------------------------	
+	real function proj(u, v)
+	implicit none
+		real, dimension(:) :: u
+		real, dimension(:) :: v
+		
+		proj = 	sp_const(scale_product(u, v)/scale_product(v, v), v)
+	
+	end function proj
 	
 end program
